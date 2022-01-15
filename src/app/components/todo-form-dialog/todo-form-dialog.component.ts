@@ -20,7 +20,7 @@ export class TodoFormDialogComponent implements OnInit {
   ngOnInit(): void {
     this.todoForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.maxLength(235)]]
     });
 
     if (this.todo) {

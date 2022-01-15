@@ -23,4 +23,7 @@
 .app-todo.is-done {
   background: rgba(0, 0, 0, 0.05);
   opacity: 0.3;
+  .todo-through {
+    text-decoration: line-through;
+  }
 }

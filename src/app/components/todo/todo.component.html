@@ -1,12 +1,15 @@
-<mat-card class="app-todo" [class.is-done]="isDone && !isHeart" @myFadeIn>
+<mat-card class="app-todo" [class.mat-elevation-z2]="!isDone" [class.is-done]="isDone && !isHeart" @myFadeIn>
   <!-- <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ todo.title }}</mat-card-title>
     <mat-card-subtitle>{{ todo.subtitle }}</mat-card-subtitle>
   </mat-card-header> -->
-  <mat-card-subtitle>{{ todo.subtitle }}</mat-card-subtitle>
+  <mat-card-title class="todo-through" *ngIf="!todo.description"> {{ todo.title }}</mat-card-title>
+  <mat-card-subtitle class="todo-through" *ngIf="todo.description">
+    {{ todo.subtitle }}
+  </mat-card-subtitle>
   <img mat-card-image [src]="todo.imgUrl" />
-  <mat-card-content class="todo-description">
+  <mat-card-content class="todo-description todo-through" *ngIf="todo.description">
     {{ todo.description }}
   </mat-card-content>
   <mat-card-actions align="end">
@@ -21,10 +24,12 @@
     <button mat-icon-button (click)="updateTodo()" [disabled]="isDone">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
-    <button mat-icon-button><mat-icon>share</mat-icon></button>
+    <button mat-icon-button disabled>
+      <mat-icon>chat_bubble_outline</mat-icon>
+    </button>
+    <button mat-icon-button disabled><mat-icon>share</mat-icon></button>
     <div class="spacer"></div>
-    <button mat-icon-button (click)="remove(index)">
+    <button mat-icon-button (click)="remove(index)" color="warn">
       <mat-icon>delete_outline</mat-icon>
     </button>
   </mat-card-actions>

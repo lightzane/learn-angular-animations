@@ -41,8 +41,8 @@ import { TodoFormDialogComponent } from './components/todo-form-dialog/todo-form
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
     useValue: {
       duration: 5000,
-      horizontalPosition: 'left',
-      verticalPosition: 'top'
+      // horizontalPosition: 'left',
+      // verticalPosition: 'top'
     }
   }],
   bootstrap: [AppComponent]

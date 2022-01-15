@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TodoFormDialogComponent } from '../../components/todo-form-dialog/todo-form-dialog.component';
-import { myFadeOut, myListAnimation } from '../../shared/animations/my-animations';
+import { fromTop, myFadeOut, myListAnimation } from '../../shared/animations/my-animations';
 import { Todo } from '../../shared/interfaces/todo';
+import { mockTodos } from '../../shared/mocks/todos.mock';
 
 @Component({
   selector: 'app-todo-container',
@@ -11,12 +12,14 @@ import { Todo } from '../../shared/interfaces/todo';
   styleUrls: ['./todo-container.component.scss'],
   animations: [
     myListAnimation,
-    myFadeOut
+    myFadeOut,
+    fromTop
   ]
 })
-export class TodoContainerComponent implements OnInit {
+export class TodoContainerComponent implements OnInit, AfterViewInit {
 
   todos: Todo[] = [];
+  isViewInit: boolean = false;
 
   private todoImages = [
     'https://play-lh.googleusercontent.com/XranFJGXPq2FLccLe8DiQ-O9UpYBbUoKIDqZ7LKB2t7wlc9TUwhriujLELd6djTUVkA',
@@ -34,13 +37,22 @@ export class TodoContainerComponent implements OnInit {
   ngOnInit(): void {
     for (let i = 0; i < this.todoImages.length; i++) {
       const x = i + 1;
+      const title = i == 4 ? 'Play Sky Children of the Light' : undefined;
+      const subtitle = title;
       this.todos.splice(0, 0, {
-        title: `Title-${x}`,
-        subtitle: `Subtitle-${x}`,
+        title: title || `Title-${x}`,
+        subtitle: subtitle || `Title-${x}`,
         imgUrl: this.todoImages[i],
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis officia, nulla facere excepturi odit esse asperiores ab eligendi expedita aliquid similique sit distinctio error, saepe quia corrupti reiciendis, omnis exercitationem.'
       });
     }
+    for (let todo of mockTodos) {
+      this.todos.splice(0, 0, todo);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.isViewInit = true;
   }
 
   // addTodos() {
@@ -53,7 +65,8 @@ export class TodoContainerComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TodoFormDialogComponent, {
-      minWidth: '500px'
+      maxWidth: '500px',
+      minWidth: '375px'
     });
     dialogRef.afterClosed().subscribe((todo: Todo) => {
       if (todo) {
@@ -66,7 +79,8 @@ export class TodoContainerComponent implements OnInit {
 
   updateTodo(todo: Todo, index?: number): void {
     const dialogRef = this.dialog.open(TodoFormDialogComponent, {
-      minWidth: '500px',
+      maxWidth: '500px',
+      minWidth: '375px',
       data: todo
     });
     dialogRef.afterClosed().subscribe((todo: Todo) => {

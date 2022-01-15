@@ -4,41 +4,22 @@
     <p>
       <mat-form-field appearance="outline" [style.width.%]="100">
         <mat-label>Title</mat-label>
-        <input
-          matInput
-          type="text"
-          formControlName="title"
-          placeholder="Title"
-          maxlength="50" />
+        <input matInput type="text" formControlName="title" placeholder="Title" maxlength="50" />
         <mat-hint>Characters remaining: {{ 50 - title.value.length }}</mat-hint>
-        <mat-error *ngIf="title.errors?.maxlength">
-          Max characters reached: {{ title.errors.maxlength.requiredLength }}
-        </mat-error>
+        <mat-error *ngIf="title.errors?.maxlength"> Max characters reached: {{ title.errors.maxlength.requiredLength }} </mat-error>
       </mat-form-field>
     </p>
     <p>
       <mat-form-field appearance="outline" [style.width.%]="100">
         <mat-label>Description</mat-label>
-        <textarea
-          matInput
-          formControlName="description"
-          placeholder="Write some description"
-          rows="10"
-          maxlength="235"></textarea>
-        <mat-hint>
-          Characters remaining: {{ 235 - description.value.length }}
-        </mat-hint>
+        <textarea matInput formControlName="description" placeholder="Write some description" rows="10" maxlength="235"></textarea>
+        <mat-hint *ngIf="!!description.value.length"> Characters remaining: {{ 235 - description.value.length }} </mat-hint>
+        <mat-hint *ngIf="!description.value.length">Optional</mat-hint>
       </mat-form-field>
     </p>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button
-    mat-raised-button
-    color="primary"
-    [mat-dialog-close]="todoForm.value"
-    [disabled]="todoForm.invalid">
-    Submit
-  </button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="todoForm.value" [disabled]="todoForm.invalid">Submit</button>
 </mat-dialog-actions>
