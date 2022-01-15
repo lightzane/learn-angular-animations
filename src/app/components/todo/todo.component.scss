@@ -1,0 +1,26 @@
+.todo-description {
+  white-space: pre-wrap;
+}
+
+.example-header-image {
+  background: lightskyblue;
+  background-size: cover;
+}
+
+.spacer {
+  flex: auto;
+}
+
+.app-todo {
+  margin-top: 1em;
+
+  img {
+    background: red;
+    min-width: 100%;
+  }
+}
+
+.app-todo.is-done {
+  background: rgba(0, 0, 0, 0.05);
+  opacity: 0.3;
+}

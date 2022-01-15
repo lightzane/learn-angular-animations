@@ -1,0 +1,31 @@
+<mat-card class="app-todo" [class.is-done]="isDone && !isHeart" @myFadeIn>
+  <!-- <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ todo.title }}</mat-card-title>
+    <mat-card-subtitle>{{ todo.subtitle }}</mat-card-subtitle>
+  </mat-card-header> -->
+  <mat-card-subtitle>{{ todo.subtitle }}</mat-card-subtitle>
+  <img mat-card-image [src]="todo.imgUrl" />
+  <mat-card-content class="todo-description">
+    {{ todo.description }}
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-icon-button [color]="isDone ? 'primary' : ''" (click)="done()">
+      <mat-icon>
+        {{ isDone ? 'check_circle' : 'check_circle_outline' }}
+      </mat-icon>
+    </button>
+    <button mat-icon-button [color]="isHeart ? 'accent' : ''" (click)="heart()">
+      <mat-icon>{{ isHeart ? 'favorite' : 'favorite_outline' }}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="updateTodo()" [disabled]="isDone">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
+    <button mat-icon-button><mat-icon>share</mat-icon></button>
+    <div class="spacer"></div>
+    <button mat-icon-button (click)="remove(index)">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
