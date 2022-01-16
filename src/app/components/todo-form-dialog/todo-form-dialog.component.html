@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>Todo Form</h2>
+<h2 mat-dialog-title>
+  {{ data.new ? 'Add Todo' : 'Update Todo' }}
+</h2>
 <mat-dialog-content>
   <form [formGroup]="todoForm">
     <p>
@@ -19,7 +21,9 @@
     </p>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="todoForm.value" [disabled]="todoForm.invalid">Submit</button>
+<mat-dialog-actions align="end" class="btn-group">
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [color]="data.new ? 'primary' : 'accent'" [mat-dialog-close]="todoForm.value" [disabled]="todoForm.invalid">
+    {{ data.new ? 'Add' : 'Update' }}
+  </button>
 </mat-dialog-actions>

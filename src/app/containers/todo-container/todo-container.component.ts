@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TodoFormDialogComponent } from '../../components/todo-form-dialog/todo-form-dialog.component';
-import { fromTop, myFadeOut, myListAnimation } from '../../shared/animations/my-animations';
+import { pop, myFadeOut, myListAnimation } from '../../shared/animations/my-animations';
 import { Todo } from '../../shared/interfaces/todo';
 import { mockTodos } from '../../shared/mocks/todos.mock';
 
@@ -13,7 +13,7 @@ import { mockTodos } from '../../shared/mocks/todos.mock';
   animations: [
     myListAnimation,
     myFadeOut,
-    fromTop
+    pop
   ]
 })
 export class TodoContainerComponent implements OnInit, AfterViewInit {
@@ -52,21 +52,15 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.isViewInit = true;
+    // to prevent Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: 'false'. Current value: 'true'
+    setTimeout(() => this.isViewInit = true, 50);
   }
-
-  // addTodos() {
-  //   this.todos.splice(0, 0, {
-  //     title: 'test',
-  //     subtitle: 'test',
-  //     description: 'test'
-  //   });
-  // }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TodoFormDialogComponent, {
       maxWidth: '500px',
-      minWidth: '375px'
+      minWidth: '375px',
+      data: { new: true }
     });
     dialogRef.afterClosed().subscribe((todo: Todo) => {
       if (todo) {
@@ -81,7 +75,7 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(TodoFormDialogComponent, {
       maxWidth: '500px',
       minWidth: '375px',
-      data: todo
+      data: { new: false, todo }
     });
     dialogRef.afterClosed().subscribe((todo: Todo) => {
       if (todo) {

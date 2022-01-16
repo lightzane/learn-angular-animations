@@ -20,7 +20,7 @@ export const myListAnimation = trigger('myListAnimation', [ // animates DOM elem
 // (see also todo-container.component.ts)
 // the trigger "@myFadeOut" is located in todo-container.component.html
 export const myFadeOut = trigger('myFadeOut', [ // animates DOM elements that have @myFadeOut if transition to state ('leave') is met
-  transition(':leave', [ // ! triggers of :leave transition should not be put directly on an element being removed
+  transition(':leave', [ // ! triggers of :leave transition should not be put directly on a child component leaving
     animate('0.5s ease-out', style({ opacity: 0, transform: 'rotate(-30deg) translateX(50%)' })) // ! else this animate not work will not because the element is already removed along with the trigger
   ])
 ]);

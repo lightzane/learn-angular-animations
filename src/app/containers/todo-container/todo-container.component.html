@@ -1,5 +1,6 @@
 <div class="todo-wrapper" @myListAnimation>
-  <button *ngIf="isViewInit" mat-raised-button color="primary" (click)="openDialog()" [style.width.%]="100" @fromTop>Add todos</button>
+  <br />
+  <button *ngIf="isViewInit" mat-raised-button color="primary" (click)="openDialog()" class="btn-add-todos" @pop>Add todos</button>
   <div class="app-todo" *ngFor="let todo of todos; index as i" @myFadeOut>
     <app-todo [todo]="todo" [index]="i" (updateEmitter)="updateTodo($event, i)" (removeEmitter)="remove($event)"></app-todo>
   </div>

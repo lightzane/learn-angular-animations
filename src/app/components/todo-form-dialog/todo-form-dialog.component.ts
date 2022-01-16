@@ -13,7 +13,9 @@ export class TodoFormDialogComponent implements OnInit {
   todoForm: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private todo: Todo,
+    // public data ==> html can use "data" variable
+    // private data ==> html can't find "data" variable and is an unknown property
+    @Inject(MAT_DIALOG_DATA) public data: { new: boolean, todo: Todo; },
     private fb: FormBuilder
   ) { }
 
@@ -23,10 +25,8 @@ export class TodoFormDialogComponent implements OnInit {
       description: ['', [Validators.maxLength(235)]]
     });
 
-    if (this.todo) {
-      this.title.setValue(this.todo.title);
-      this.description.setValue(this.todo.description);
-    }
+    if (this.data.todo) this.title.setValue(this.data.todo.title);
+    if (this.data.todo?.description) this.description.setValue(this.data.todo.description);
   }
 
   get title(): AbstractControl {
