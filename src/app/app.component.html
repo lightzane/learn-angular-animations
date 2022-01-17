@@ -1,1 +1,22 @@
-<app-todo-container></app-todo-container>
+<div class="mat-app-background" [ngClass]="{ 'mycustom-dark-theme': isDarkTheme }">
+    <!-- .mat-app-background is required to ensure application of dark themes in all background (else some section will still be white in background) -->
+
+    <mat-drawer-container class="example-drawer-container">
+        <mat-drawer #drawer mode="push">
+            <button mat-button class="example-drawer-button" (click)="resetTodos()">Reset Todos</button>
+        </mat-drawer>
+
+        <mat-toolbar color="primary">
+            <button mat-icon-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Animations</span>
+            <div class="example-spacer"></div>
+            <mat-icon>light_mode</mat-icon>
+            <mat-slide-toggle [checked]="isDarkTheme" (change)="toggleTheme()"> </mat-slide-toggle>
+            <mat-icon>dark_mode</mat-icon>
+        </mat-toolbar>
+
+        <app-todo-container></app-todo-container>
+    </mat-drawer-container>
+</div>

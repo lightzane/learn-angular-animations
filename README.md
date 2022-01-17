@@ -1,6 +1,7 @@
 # LearnAngularAnimations
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+**BONUS:** with dark theme toggle (see `styles.scss`, `app.component.ts`, `app.components.html`)
 <br>
 
 ```typescript

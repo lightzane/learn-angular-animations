@@ -18,7 +18,7 @@ import { mockTodos } from '../../shared/mocks/todos.mock';
 })
 export class TodoContainerComponent implements OnInit, AfterViewInit {
 
-  todos: Todo[] = [];
+  todos: Todo[] = JSON.parse(localStorage.getItem('todos')) || [];
   isViewInit: boolean = false;
 
   private todoImages = [
@@ -35,19 +35,21 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < this.todoImages.length; i++) {
-      const x = i + 1;
-      const title = i == 4 ? 'Play Sky Children of the Light' : undefined;
-      const subtitle = title;
-      this.todos.splice(0, 0, {
-        title: title || `Title-${x}`,
-        subtitle: subtitle || `Title-${x}`,
-        imgUrl: this.todoImages[i],
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis officia, nulla facere excepturi odit esse asperiores ab eligendi expedita aliquid similique sit distinctio error, saepe quia corrupti reiciendis, omnis exercitationem.'
-      });
-    }
-    for (let todo of mockTodos) {
-      this.todos.splice(0, 0, todo);
+    if (!this.todos.length) {
+      for (let i = 0; i < this.todoImages.length; i++) {
+        const x = i + 1;
+        const title = i == 4 ? 'Play Sky Children of the Light' : undefined;
+        const subtitle = title;
+        this.todos.splice(0, 0, {
+          title: title || `Title-${x}`,
+          subtitle: subtitle || `Title-${x}`,
+          imgUrl: this.todoImages[i],
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis officia, nulla facere excepturi odit esse asperiores ab eligendi expedita aliquid similique sit distinctio error, saepe quia corrupti reiciendis, omnis exercitationem.'
+        });
+      }
+      for (let todo of mockTodos) {
+        this.todos.splice(0, 0, todo);
+      }
     }
   }
 
@@ -67,6 +69,7 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
         todo.subtitle = todo.title;
         this.todos.splice(0, 0, todo);
         this.snackbar.open('TODO: ' + todo.title);
+        this.saveTodos();
       }
     });
   }
@@ -83,6 +86,7 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
         this.todos[index].subtitle = todo.title;
         this.todos[index].description = todo.description;
         this.snackbar.open('TODO updated: ' + todo.title);
+        this.saveTodos();
       }
     });
   }
@@ -91,6 +95,14 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
     this.todos.splice(event, 1);
     // this.todos = this.todos.filter((todo, index) => index !== event); // same 'end' with above line
     this.snackbar.open('Removed successfully');
+    this.saveTodos();
+  }
+
+  /**
+   * Save `todos` to localStorage
+   */
+  saveTodos(): void {
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
 }
