@@ -48,7 +48,7 @@ $frontend-theme-dark: mat.define-dark-theme(
 @include mat.all-component-themes($frontend-theme);
 
 .mycustom-dark-theme {
-    @include mat.all-component-themes($frontend-theme-dark);
+    @include mat.all-component-colors($frontend-theme-dark);
 }
 
 /* You can add global styles to this file, and also import other style files */
