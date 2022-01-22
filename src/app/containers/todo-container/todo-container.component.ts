@@ -60,8 +60,8 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TodoFormDialogComponent, {
-      maxWidth: '500px',
-      minWidth: '375px',
+      maxWidth: '100vh', // for mobile
+      width: '500px',
       data: { new: true }
     });
     dialogRef.afterClosed().subscribe((todo: Todo) => {
@@ -76,8 +76,8 @@ export class TodoContainerComponent implements OnInit, AfterViewInit {
 
   updateTodo(todo: Todo, index?: number): void {
     const dialogRef = this.dialog.open(TodoFormDialogComponent, {
-      maxWidth: '500px',
-      minWidth: '375px',
+      maxWidth: '100vh', // for mobile
+      width: '500px',
       data: { new: false, todo }
     });
     dialogRef.afterClosed().subscribe((todo: Todo) => {
