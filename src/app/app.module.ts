@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { TodoContainerComponent } from './containers/todo-container/todo-container.component';
 import { TodoComponent } from './components/todo/todo.component';
@@ -41,7 +42,8 @@ import { TodoFormDialogComponent } from './components/todo-form-dialog/todo-form
     MatSnackBarModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [{
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

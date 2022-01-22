@@ -1,5 +1,8 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +13,14 @@ export class AppComponent {
   isDarkTheme = localStorage.getItem('dark') ? true : false;
   title = 'learn-angular-animations';
 
-  constructor(private overlayContainer: OverlayContainer) { }
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map((bp) => bp.matches),
+      shareReplay()
+    );
+
+  constructor(private overlayContainer: OverlayContainer, private breakpointObserver: BreakpointObserver) { }
+
 
   ngOnInit(): void {
     this.applyDarkThemeOnDialogs();
